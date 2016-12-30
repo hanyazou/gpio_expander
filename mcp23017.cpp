@@ -40,11 +40,13 @@ void mcp23017::postSetup(const uint8_t adrs){
 void mcp23017::begin(bool protocolInitOverride) {
 	if (!protocolInitOverride && !_error){
 		Wire.begin();
+#if 0
 		#if ARDUINO >= 157
 			Wire.setClock(400000UL); // Set I2C frequency to 400kHz
 		#else
 			TWBR = ((F_CPU / 400000UL) - 16) / 2; // Set I2C frequency to 400kHz
 		#endif
+#endif
 	}
 	delay(100);
 	writeByte(IOCON,0b00100000);//read datasheet for details!
